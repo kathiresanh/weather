@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var board=document.createElement("div");
+        board.style.backgroundColor="white"
+        board.style.width="100%";
+        board.style.display="flex";
+        board.style.flexDirection="row";
+        board.style.flexWrap="wrap";
+        document.body.appendChild(board)
+        fetch("https://restcountries.com/v3.1/all")
+        .then(function(data){
+            return data.json();
+        })
+        .then(function(dataobj){
+           console.log(dataobj)
+           dataobj.forEach(function(element) {
+               
+               e=(element.car.signs)
+               
+        var box=document.createElement("div")
+        box.style.width="200px";
+        box.style.height="200px";
+        box.style.marginBottom="20px";
+        box.style.marginRight="50px";
+        box.style.display="flex";
+        box.style.borderRadius = "5px";
+        box.style.flexDirection="column"
+        box. style.marginRight="5px"
+        box.style.backgroundColor="grey";
+        var smallbox1=document.createElement("IMG");
+
+        smallbox1.setAttribute("src",element.flags.png);
+        smallbox1.setAttribute("width", "198");
+        smallbox1.setAttribute("height", "99");
+        smallbox1.setAttribute("alt", "");
+   
+        box.appendChild(smallbox1)
+        var smallbox2=document.createElement("div");
+        smallbox2.style.width="198px";
+        smallbox2.style.height="20px";
+        smallbox2.style.marginTop="1px";
+        smallbox2.style.backgroundColor="pink";
+        //  smallbox2.style.borderRadius = "10px";
+        d=element.name.common
+        smallbox2.innerText=element.name.common;
+        
+        smallbox2.style.marginLeft="1px"
+        smallbox2.style.backgroundColor="white";
+        box.appendChild(smallbox2)
+
+        var smallbox3=document.createElement("div");
+        smallbox3.style.width="198px";
+        smallbox3.style.height="49px";
+        smallbox3.style.backgroundColor="pink"
+    
+        
+        smallbox3.innerText=e;
+        
+        smallbox3.style.marginLeft="1px"
+        smallbox3.style.backgroundColor="white";
+        box.appendChild(smallbox3)
+        
+        //  new button creation
+        var mybutton = document.createElement("button")
+        mybutton.backgroundColor="grey";
+        mybutton.style.width="150px";
+        mybutton.innerText="Get weather"
+        mybutton.style.height="40px";
+        mybutton.addEventListener("click",function(){
+
+            fetch("https://api.openweathermap.org/data/2.5/weather?q="+smallbox2.innerText+"&appid=a739c520cd3709b5b3b92c344bcb9067")
+            .then(function(data1){
+                return data1.json();
+            })
+            .then(function(dataobj1){
+              console.log(dataobj1)
+
+             
+            var popup = document.createElement("div");
+            popup.style.backgroundColor="#e3e3e3";
+            popup.style.width="300px";
+            popup.style.height="500px";
+            popup.style.position="fixed";
+            popup.style.left="40%";
+            popup.style.top="80px";
+            popup.style.borderRadius="25px"
+            popup.style.borderBlockColor="black"
+            var name=document.createElement("h3")
+            name.innerText=smallbox2.innerText;
+            name.style.textAlign="center"
+            popup.appendChild(name)
+            
+            var temp1 = document.createElement("h4");
+            temp1.innerText="Temperatures :"+dataobj1.main.temp;
+            temp1.style.textAlign="center";
+             popup.appendChild(temp1)
+
+             var feel = document.createElement("h4");
+            feel.innerText="Feelslike :"+dataobj1.main.feels_like;
+            feel.style.textAlign="center";
+             popup.appendChild(feel)
+
+             var ground = document.createElement("h4");
+            ground.innerText="Groundlevel :"+dataobj1.main.grnd_level;
+            ground.style.textAlign="center";
+             popup.appendChild(ground)
+
+             var humity = document.createElement("h4");
+            humity.innerText="Humidity :"+dataobj1.main.humidity;
+            humity.style.textAlign="center";
+             popup.appendChild(humity)
+
+             var pressure= document.createElement("h4");
+             pressure.innerText="pressure :"+dataobj1.main.pressure;
+             pressure.style.textAlign="center";
+             popup.appendChild(pressure)
+
+             var sea_level= document.createElement("h4");
+             sea_level.innerText="seaLevel :"+dataobj1.main.sea_level;
+             sea_level.style.textAlign="center";
+             popup.appendChild(sea_level)
+
+             var temp_max= document.createElement("h4");
+             temp_max.innerText="TempMax :"+dataobj1.main.temp_max;
+             temp_max.style.textAlign="center";
+             popup.appendChild(temp_max)
+
+             var temp_min= document.createElement("h4");
+             temp_min.innerText="TempMin :"+dataobj1.main.temp_min;
+             temp_min.style.textAlign="center";
+             popup.appendChild(temp_min)
+
+             var popbutton = document.createElement("button");
+             popbutton.style.backgroundColor="white";
+             popbutton.style.width="150px";
+             popbutton.style.height="40px";
+             popbutton.style.fontSize = "x-large";
+             popbutton.style.position="fixed"
+             popbutton.style.marginTop="40px";
+             popbutton.style.left="620px"
+             popbutton.innerText="Close"
+             popbutton.style.borderRadius="25px"
+             popbutton.addEventListener("click",function(){
+             popup.style.display = 'none';
+             })
+             popup.appendChild(popbutton)
+            document.body.appendChild(popup)
+
+             console.log(smallbox2.innerText)
+            // fetch("https://api.openweathermap.org/data/2.5/weather?q="+smallbox2.innerText+"&appid=a739c520cd3709b5b3b92c344bcb9067")
+            // .then(response=>response.json())
+            // .then(data=>console.log(data.main)
+           
+            
+        })
+          
+
+            
+        
+        });
+        box.appendChild(mybutton)
+
+        board.appendChild(box)
+               
+           });
+        })
+        
+        .catch(function(err){
+            console.log(err)
+        })
+        
+        fetch()
+
+
+
+ 
+ 
+      
+
+    </script>
+</body>
+</html>
